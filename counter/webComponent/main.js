@@ -1,9 +1,10 @@
 class CustomCounter extends HTMLElement {
-  count = 0;
+  count;
 
   constructor() {
     super();
 
+    this.count = this.getAttribute('count') ?? 0;
     const shadow = this.attachShadow({ mode: "open" });
 
     const wrapper = document.createElement("div");
