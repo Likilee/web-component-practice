@@ -1,4 +1,6 @@
 class CustomCounter extends HTMLElement {
+  count = 0;
+
   constructor() {
     super();
 
@@ -14,16 +16,17 @@ class CustomCounter extends HTMLElement {
 
     const countElement = document.createElement("p");
     countElement.setAttribute("id", "count");
+    countElement.innerText = this.count;
 
     const upButton = document.createElement("button");
     upButton.innerText = "up";
     upButton.setAttribute("id", "up-button");
-    upButton.addEventListener("click", this.handleIncrease);
+    upButton.addEventListener("click", this.handleIncrease.bind(this))
 
     const downButton = document.createElement("button");
     downButton.innerText = "down";
     downButton.setAttribute("id", "down-button");
-    downButton.addEventListener("click", this.handleDecrease);
+    downButton.addEventListener("click", this.handleDecrease.bind(this))
 
     divElement.appendChild(pTag);
     divElement.appendChild(countElement);
@@ -34,9 +37,7 @@ class CustomCounter extends HTMLElement {
     shadow.appendChild(wrapper);
   }
 
-  count = 0;
-
-  handleIncrease() {
+  handleIncrease(e) {
     this.count++;
     const countElement = this.shadowRoot.getElementById("count");
     countElement.innerText = this.count;
