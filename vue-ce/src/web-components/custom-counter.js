@@ -1,12 +1,13 @@
 export default class CustomCounter extends HTMLElement {
-  count;
+  count = 0;
+  static get observedAttributes() { return ['count']; }
 
   constructor() {
     super();
 
     const shadow = this.attachShadow({ mode: "open" });
     // props
-    this.count = this.getAttribute("count") ?? 0;
+    // this.count = this.getAttribute("count") ?? 0;
 
     const wrapper = document.createElement("div");
     wrapper.setAttribute("id", "wrapper");
@@ -48,6 +49,12 @@ export default class CustomCounter extends HTMLElement {
     this.count--;
     const countElement = this.shadowRoot.getElementById("count");
     countElement.innerText = this.count;
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    console.log(name, oldValue, newValue);
+    if (name === 'count')
+      this.count = newValue;
   }
 }
 
