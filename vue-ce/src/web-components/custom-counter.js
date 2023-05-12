@@ -4,8 +4,9 @@ export default class CustomCounter extends HTMLElement {
   constructor() {
     super();
 
+    const shadow = this.attachShadow({ mode: "open" });
+    // props
     this.count = this.getAttribute("count") ?? 0;
-    const shadow = this.attachShadow({ mode: "closed" });
 
     const wrapper = document.createElement("div");
     wrapper.setAttribute("id", "wrapper");
