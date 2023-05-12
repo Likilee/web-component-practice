@@ -1,5 +1,5 @@
 export default class CustomCounter extends HTMLElement {
-  count = 0;
+  count;
   static get observedAttributes() { return ['count']; }
 
   constructor() {
@@ -7,8 +7,9 @@ export default class CustomCounter extends HTMLElement {
 
     const shadow = this.attachShadow({ mode: "open" });
     // props
+    // console.log('생성자', this, this.count, this.getAttribute("count"));
     // this.count = this.getAttribute("count") ?? 0;
-
+    // this.setAttribute("count", this.count);
     const wrapper = document.createElement("div");
     wrapper.setAttribute("id", "wrapper");
 
@@ -49,6 +50,12 @@ export default class CustomCounter extends HTMLElement {
     this.count--;
     const countElement = this.shadowRoot.getElementById("count");
     countElement.innerText = this.count;
+  }
+
+  connectedCallback() {
+    console.log('connectedCallback', this, this.count, this.getAttribute("count"));
+    // this.count = this.getAttribute("count");
+    this.shadowRoot.getElementById("count").innerText = this.count;
   }
 
   attributeChangedCallback(name, oldValue, newValue) {

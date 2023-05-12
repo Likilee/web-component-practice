@@ -18,7 +18,7 @@ import TheWelcome from "./components/TheWelcome.vue";
   </header>
 
   <main>
-    <custom-counter count="3" />
+    <custom-counter .count="3" />
   </main>
 </template>
 
