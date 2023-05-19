@@ -40,6 +40,10 @@ export default class CustomCounter extends HTMLElement {
     shadow.appendChild(wrapper);
   }
 
+  render() {
+    this.shadowRoot.getElementById("count").innerText = this.count;
+  }
+
   handleIncrease(e) {
     this.count++;
     const countElement = this.shadowRoot.getElementById("count");
@@ -64,13 +68,16 @@ export default class CustomCounter extends HTMLElement {
   connectedCallback() {
     // console.log('connectedCallback', this, this.count, this.getAttribute("count"));
     // this.count = this.getAttribute("count");
-    this.shadowRoot.getElementById("count").innerText = this.count;
+    this.render();
   }
+
 
   attributeChangedCallback(name, oldValue, newValue) {
     console.log(name, oldValue, newValue);
-    if (name === 'count')
+    if (name === 'count') {
       this.count = newValue;
+    }
+    this.render();
   }
 }
 

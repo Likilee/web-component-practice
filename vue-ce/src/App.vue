@@ -2,11 +2,20 @@
 import HelloWorld from "./components/HelloWorld.vue";
 import TheWelcome from "./components/TheWelcome.vue";
 import {ref} from 'vue';
+
 const count = ref(3);
+
+const customCounter = ref<HTMLElement>();
 
 const handleCountChange = (e) => {
   count.value = e.detail.count;
   console.log(e, count.value);
+  customCounter.value?.setAttribute('count', `${count.value}`);
+}
+
+const handlePlus = () => {
+  count.value++;
+  customCounter.value?.setAttribute('count', `${count.value}`);
 }
 </script>
 
@@ -25,9 +34,9 @@ const handleCountChange = (e) => {
   </header>
 
   <main>
-    <custom-counter :count="count" @count-change="handleCountChange"/>
+    <custom-counter ref="customCounter" :count="count" @count-change="handleCountChange"/>
     <p>{{count}}</p>
-    <button @click="() => count++">plus</button>
+    <button @click="handlePlus">plus</button>
   </main>
 </template>
 
