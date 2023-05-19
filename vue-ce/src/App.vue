@@ -17,6 +17,8 @@ const handlePlus = () => {
   count.value++;
   customCounter.value?.setAttribute('count', `${count.value}`);
 }
+
+const msg=ref('hello');
 </script>
 
 <template>
@@ -37,6 +39,8 @@ const handlePlus = () => {
     <custom-counter ref="customCounter" :count="count" @count-change="handleCountChange"/>
     <p>{{count}}</p>
     <button @click="handlePlus">plus</button>
+    <my-card-element :msg="msg"></my-card-element>
+    <input v-model="msg" />
   </main>
 </template>
 

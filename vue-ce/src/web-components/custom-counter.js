@@ -64,7 +64,6 @@ export default class CustomCounter extends HTMLElement {
    this.dispatchEvent(event);
   }
 
-
   connectedCallback() {
     // console.log('connectedCallback', this, this.count, this.getAttribute("count"));
     // this.count = this.getAttribute("count");
