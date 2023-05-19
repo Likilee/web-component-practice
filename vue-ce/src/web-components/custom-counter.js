@@ -1,5 +1,4 @@
 export default class CustomCounter extends HTMLElement {
-  count;
   static get observedAttributes() { return ['count']; }
 
   constructor() {
@@ -45,15 +44,25 @@ export default class CustomCounter extends HTMLElement {
     this.count++;
     const countElement = this.shadowRoot.getElementById("count");
     countElement.innerText = this.count;
+    this.dispatchCountChange();
   }
   handleDecrease() {
     this.count--;
     const countElement = this.shadowRoot.getElementById("count");
     countElement.innerText = this.count;
+    this.dispatchCountChange();
   }
 
+  dispatchCountChange() {
+   const event = new CustomEvent('count-change', {
+     detail: {count: this.count},
+   });
+   this.dispatchEvent(event);
+  }
+
+
   connectedCallback() {
-    console.log('connectedCallback', this, this.count, this.getAttribute("count"));
+    // console.log('connectedCallback', this, this.count, this.getAttribute("count"));
     // this.count = this.getAttribute("count");
     this.shadowRoot.getElementById("count").innerText = this.count;
   }

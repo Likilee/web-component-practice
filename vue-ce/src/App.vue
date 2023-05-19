@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import HelloWorld from "./components/HelloWorld.vue";
 import TheWelcome from "./components/TheWelcome.vue";
+import {ref} from 'vue';
+const count = ref(3);
+
+const handleCountChange = (e) => {
+  count.value = e.detail.count;
+  console.log(e, count.value);
+}
 </script>
 
 <template>
@@ -18,7 +25,9 @@ import TheWelcome from "./components/TheWelcome.vue";
   </header>
 
   <main>
-    <custom-counter .count="3" />
+    <custom-counter :count="count" @count-change="handleCountChange"/>
+    <p>{{count}}</p>
+    <button @click="() => count++">plus</button>
   </main>
 </template>
 
